@@ -1,0 +1,311 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in thisa directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+*/
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "simple_calendar";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP",
+        sans-serif, "Kosugi";
+}
+
+body {
+    background-color: #f1f1f2;
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP",
+        sans-serif, "Kosugi";
+}
+// devise
+.btn-twitter {
+    background-color: #1da1f2;
+}
+// headerページ
+header {
+    background-color: white;
+}
+
+.header_find_book {
+    color: black;
+    background-color: #ffe100;
+    border-bottom: 5px solid #ccc100;
+}
+
+.n-circle {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: #efa04c;
+}
+
+.dropleft .dropdown-toggle::before {
+    display: none;
+}
+
+// aboutページ
+.about_bg {
+    overflow-x: hidden;
+}
+.about_vw {
+    height: 100vh;
+    padding-top: 20vh;
+}
+.about_h1_item {
+    font-weight: 900;
+    font-size: 80px;
+}
+
+.about_slide_box {
+    height: 110%;
+    width: 110%;
+}
+.about_slide_box > img {
+    height: 100%;
+    min-height: 100%;
+}
+
+.about_find_book {
+    color: black;
+    background-color: #fed94d;
+    border-bottom: 5px solid #ccc100;
+}
+
+.about_what_h1 {
+    font-weight: 900;
+    border-bottom: medium solid #2089f1;
+}
+.about_what_span {
+    font-size: 20px;
+    background-color: #ff9800;
+    color: white;
+}
+
+.about_what_text {
+    font-size: 18px;
+}
+
+.about_intro_orangeicon {
+    color: #f7a02f;
+}
+
+.about_intro_orangetext {
+    color: #f7a02f;
+    background-color: #ff9800;
+    color: white;
+}
+
+.about_intro_blueicon {
+    color: #2f94f7;
+}
+
+.about_intro_bluetext {
+    color: #2f94f7;
+    background-color: #2f94f7;
+    color: white;
+}
+
+// user-showページ
+.user_show_readcomment {
+    font-size: 14px;
+}
+
+.user_show_btn,
+.book_show_btn {
+    width: 120px;
+    height: 70px;
+    opacity: 50%;
+    &:hover {
+        opacity: 100%;
+        background-color: #ffe100;
+    }
+}
+
+// book-showページ
+.book_show_onbtn {
+    width: 120px;
+    height: 70px;
+    opacity: 100%;
+    background-color: #ffe100;
+}
+.read_btn_active {
+    opacity: 100%;
+    background-color: #ffe100;
+}
+// book-show-readモーダル
+.read_modal_header {
+    background-color: yellow;
+}
+
+// book-rankingページ
+.ranking_item_btn {
+    width: 80px;
+    height: 50px;
+}
+
+.ranking_item_activebtn {
+    background-color: #ffe100;
+}
+
+// simple-calendar
+.simple-calendar {
+    .day {
+        width: 100px;
+    }
+    .wday-0 {
+        background-color: #ffd1d1;
+    }
+    .wday-1 {
+    }
+    .wday-2 {
+    }
+    .wday-3 {
+    }
+    .wday-4 {
+    }
+    .wday-5 {
+    }
+    .wday-6 {
+        background-color: #ffd1d1;
+    }
+    .today {
+        background-color: #87cefa;
+    }
+    .past {
+    }
+    .future {
+    }
+    .start-date {
+    }
+    .prev-month {
+    }
+    .next-month {
+    }
+    .current-month {
+    }
+    .has-events {
+    }
+    .callender_event_text {
+    }
+}
+.callender_table_text {
+    font-size: 15px;
+}
+
+@media screen and (max-width: 767px) {
+    // headerページ
+    .header_find_book {
+        color: black;
+        background-color: transparent;
+        border-bottom: 0px solid #ccc100;
+    }
+    .nav-item {
+        width: 100%;
+        margin-top: 20px;
+        margin-right: auto;
+        border-bottom: 1px solid #000000;
+    }
+    // aboutページ
+    .about_h1_item {
+        font-weight: 900;
+        font-size: 60px;
+    }
+
+    .about_intro_orangeicon {
+        margin-top: 20px;
+    }
+
+    .about_intro_blueicon {
+        margin-top: 20px;
+    }
+    // book-indexページ
+    .book_index_jacket {
+        width: 37%;
+    }
+
+    // user-showページ
+    .user_show_name {
+        font-size: 1.3rem;
+    }
+
+    .user_show_btns {
+        width: 25%;
+    }
+
+    .user_show_btn,
+    .book_show_btn {
+        width: 120px;
+        opacity: 50%;
+        &:hover {
+            width: 100%;
+            opacity: 100%;
+            background-color: #ffe100;
+        }
+    }
+
+    .read_btn_active {
+        width: 100%;
+        opacity: 100%;
+        background-color: #ffe100;
+    }
+
+    .user_show_cardbody {
+        flex-wrap: wrap;
+    }
+
+    .user_show_jacket {
+        width: 100%;
+        height: 100%;
+    }
+
+    // user-editページ
+    .user_edit_flex {
+        flex-wrap: wrap;
+        margin: 0 auto;
+    }
+
+    .user_edit_jacket {
+        margin-left: 15%;
+        margin-bottom: 5%;
+    }
+
+    .user_edit_input {
+        margin: 0 auto;
+    }
+
+    // user-cancelページ
+    .user_cancel_text {
+        font-size: 18px;
+    }
+
+    // notificationページ
+    .notification_book_jacket {
+        display: none;
+    }
+}

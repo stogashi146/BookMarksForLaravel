@@ -1,0 +1,37 @@
+version: '3.9' #docker-composeのバージョン
+services:
+  app:  #任意のサービス名
+    build: ./infra/php  #ビルド時の作業ディレクトリ
+    volumes:
+      - ./backend:/work #コンテナにマウントするディレクトリ
+
+  web:
+    image: nginx:1.20-alpine
+    ports:
+      - 8000:80
+    volumes:
+      - ./backend:/work
+      - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    working_dir: /work
+  
+  db:
+    build: ./infra/mysql
+    volumes:
+      - db-store:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_USER=${PMA_USER}
+      - PMA_PASSWORD=${PMA_PASSWORD}
+    links:
+      - db
+    ports:
+      - 8001:80
+    volumes:
+      - /sessions
+
+volumes:
+  db-store:
