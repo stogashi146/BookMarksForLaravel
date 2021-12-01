@@ -15,8 +15,9 @@ class BookController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->query("keyword");
-        $books = Book::search_books($keyword)["Items"];
-        return view('book/index',["books"=>$books]);
+        $page = $request->query("page");
+        $books = Book::search_books($keyword, $page);
+        return view('book/index',["books"=>$books, "keyword"=>$keyword]);
     }
 
     /**
@@ -44,8 +45,9 @@ class BookController extends Controller
         }else{
             $book = Book::create($book_request);
         }
-
-        return redirect()->route("book.detail", ["id" => $book]);
+        
+        return redirect()->route("book.detail", ["id"=>$book->id]);
+        // return view('book/show',compact("book"));
         
     }
 
@@ -58,6 +60,7 @@ class BookController extends Controller
     public function show($id)
     {
         $book = Book::find($id);
+        return view('book/show',compact("book"));
     }
 
     /**

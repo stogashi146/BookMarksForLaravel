@@ -11,6 +11,7 @@ class Book extends Model
 {
     protected $fillable =[
         "title",
+        "description",
         "isbn",
         "author",
         "publisher_name",
@@ -19,11 +20,11 @@ class Book extends Model
         "url"
     ];
 
-    public static function search_books($keyword, $author=""){
+    public static function search_books($keyword, $page = 1){
         $keyword = "&keyword=".$keyword;
-        $author = $author;
+        $page = "&page=".$page;
         $client = new \GuzzleHttp\Client();
-        $url =  "https://app.rakuten.co.jp/services/api/BooksTotal/Search/20170404?applicationId=1099709005909964402&formatVersion=2&hits=28&booksGenreId=001004".$keyword;
+        $url =  "https://app.rakuten.co.jp/services/api/BooksTotal/Search/20170404?applicationId=1099709005909964402&formatVersion=2&hits=28&booksGenreId=001004".$keyword.$page;
 
         $response = $client->request(
             'GET',
@@ -37,6 +38,7 @@ class Book extends Model
     public static function book_exists($book){
         return array(
             "title" => $book["title"],
+            "description" => $book["itemCaption"],
             "isbn" => $book["isbn"],
             "author" => $book["author"],
             "publisher_name" => $book["publisherName"],

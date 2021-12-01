@@ -16,13 +16,14 @@ class CreateBooksTable extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->bigIncrements('id');
         
-            $table->string("title")->nullable(false);
-            $table->string("isbn")->nullable(false);
-            $table->string("author")->nullable(false);
-            $table->string("publisher_name")->nullable(false);
-            $table->string("image_url")->nullable(false);
-            $table->date("sales_date")->nullable(false);
-            $table->string("url")->nullable(false);
+            $table->string("title")->nullable(true);
+            $table->text("description")->nullable(true);
+            $table->string("isbn")->nullable(true);
+            $table->string("author")->nullable(true);
+            $table->string("publisher_name")->nullable(true);
+            $table->string("image_url")->nullable(true);
+            $table->date("sales_date")->nullable(true);
+            $table->string("url")->nullable(true);
 
             $table->timestamps();
         });

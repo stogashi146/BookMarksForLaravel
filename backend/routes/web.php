@@ -20,10 +20,11 @@ Auth::routes();
     Route::get('/', 'HomeController@about')->name('home');
     Route::get('/about', 'HomeController@about')->name('about');
     Route::get("/books", "BookController@index")->name("books.list");
-    Route::get("/book/{id}", "BookController@show")->name("book.detail");
     Route::post("/book", "BookController@store")->name("book.store");
+    Route::get("/book/{id}", "BookController@show")->name("book.detail");
     Route::get('/book/ranking', 'BookController@ranking')->name('book.ranking');
 // });
+    Route::resource("user", "UserController",["only" => ["show", "edit", "update"]]);
 
 Route::group(['middleware' => 'auth'], function () {
     

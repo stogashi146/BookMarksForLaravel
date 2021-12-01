@@ -32,10 +32,10 @@
                             <ul class="navbar-nav ml-auto">
                             @if(\Auth::user())
                                 <li class="nav-item active mr-3">
-                                    <a class="header_find_book p-3" href="{{ route("books.list", ["keyword"=> "本"]) }}">本を探す</a>
+                                    <a class="header_find_book p-3" href="{{ route("books.list", ["keyword"=> "本", "page" => 1]) }}">本を探す</a>
                                 </li>
                                 <li class="nav-item active mr-4">
-                                    <a class="nav-link" href="{{-- route("user.detail") --}}">
+                                    <a class="nav-link" href="{{ route("user.show", ["user"=>\Auth::user()]) }}">
                                         <i class="fas fa-user fa-fw"></i>
                                         <span>マイページ</span>
                                     </a>
@@ -87,7 +87,7 @@
                                 </li>
                             @else
                                 <li class="nav-item active mr-4">
-                                    <a href="{{ route("books.list", ["keyword"=> "本"]) }}" class="header_find_book p-3">
+                                    <a href="{{ route("books.list", ["keyword"=> "本", "page" => 1]) }}" class="header_find_book p-3">
                                         本を探す
                                     </a>
                                 </li>

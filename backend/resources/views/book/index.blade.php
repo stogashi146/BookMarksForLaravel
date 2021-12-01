@@ -10,7 +10,7 @@
 </div>
 <div class="row">
   <div class="text-center bg-white py-3">
-    @foreach($books as $book)
+    @foreach($books["Items"] as $book)
       <a class="col-md-2 col-sm-6 m-2" href="{{ route("book.store",["book"=> App\Book::book_exists($book)]) }}" onclick="event.preventDefault();
                                                                            document.getElementById('book-create-{{$book["isbn"]}}').submit();">
         <img src="{{ str_replace("?_ex=200x200","",$book["largeImageUrl"]) }}" alt=""　width="25%" height="370px" class="book_index_jacket">  
@@ -24,15 +24,19 @@
   </div>
 </div>
 <div class="row d-flex justify-content-center my-3 mb-5">
-  <% if @books.previous_page?%>
-  <h4>
-    <%= link_to "前のページ", books_path(keyword: @keyword, page: @page - 1), class:"btn btn-light mx-2 ", data: { disable_with: "処理中..." } %>
-  </h4>
-<% end; if @books.next_page?%>
-<h4>
-  <%= link_to "次のページ", books_path(keyword: @keyword, page: @page + 1, ), class:"btn btn-light mx-2", data: { disable_with: "処理中..." } %>
-</h4>
-<% end %>
-</div>
+  @if(1 < $books["page"] && $books["page"] <= $books["pageCount"])
+    <h4>
+      <a href="{{ route("books.list", ["keyword"=>$keyword, "page" => $books["page"]-1])  }}" class="btn btn-light mx-2 " data={ disable_with: "処理中..." }>
+        前のページ
+      </a>
+    </h4>
+  @endif
+  @if(1 <= $books["page"] && $books["page"] < $books["pageCount"])
+    <h4>
+      <a href="{{ route("books.list", ["keyword"=>$keyword, "page" => $books["page"]+1])  }}" class="btn btn-light mx-2 " data={ disable_with: "処理中..." }>
+        次のページ
+      </a>
+    </h4>
+  @endif
 </div>
 @endsection
