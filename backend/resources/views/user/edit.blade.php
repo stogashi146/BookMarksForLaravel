@@ -13,13 +13,17 @@
   <div class="row">
     <div class="col-md-12 text-center mt-4">
       <div class="bg-white py-5">
-        {{ Form::model($user, ["route" => ["user.update", $user->id]]) }}
+        {{ Form::model($user, ["route" => ["user.update", $user->id], "enctype" => "multipart/form-data"]) }}
           <div class="d-inline-flex user_edit_flex">
             <div class="d-block.mr-3 user_edit_jacket">
-              <img src="{{asset('images/'.$user -> image)}}" class="rounded-circle shadow-sm mr-4 mb-4" width="180px" height="180px">
+              @if($user->image == "noimage.jpg")
+                <img src="{{asset('images/noimage.jpg')}}" class="rounded-circle shadow-sm ml-4" width="180px" height="180px">
+              @else
+                <img src="{{asset('storage/images/'.$user->image)}}" class="rounded-circle shadow-sm ml-4" width="180px" height="180px">
+              @endif
               <br>
               <small>
-                = f.file_field :profile_image
+                {{ Form::file("image") }}
               </small>
             </div>
             <div class="d-block user_edit_input">

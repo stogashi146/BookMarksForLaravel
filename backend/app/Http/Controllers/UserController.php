@@ -45,7 +45,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // 画像ファイル名を取得
+        $image = $request->file("image")->getClientOriginalName(); //ファイル名を拡張子まで取得
+        request()->file("image")->storeAs("public/images", $image);
+
+        $user = User::find($id);
+        $user->name = request("name");
+        $user->email = request("email");
+        $user->introduction = request("introduction");
+        $user->image = $image;
+        $user -> save();
+
+        return redirect()->route("user.show", ["user"=>$user]);
     }
 
     /**

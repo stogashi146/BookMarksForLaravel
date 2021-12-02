@@ -9,7 +9,11 @@
         <div class="row mt-5">
           <div class="col-md-8 col-sm-8">
             <div class="d-inline-flex align-items-center">
-              <img src="{{asset('images/'.$user->image)}}" class="rounded-circle shadow-sm ml-4" width="130px" height="130px">
+              @if($user->image == "noimage.jpg")
+                <img src="{{asset('images/noimage.jpg')}}" class="rounded-circle shadow-sm ml-4" width="130px" height="130px">
+              @else
+                <img src="{{asset('storage/images/'.$user->image)}}" class="rounded-circle shadow-sm ml-4" width="130px" height="130px">
+              @endif
               <div class="d-block ml-5">
                 <h3 class="user_show_name">
                   {{ $user->name }}
