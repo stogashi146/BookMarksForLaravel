@@ -15,6 +15,12 @@ class CreateReadsTable extends Migration
     {
         Schema::create('reads', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            $table->integer('user_id')->nullable(false);
+            $table->integer('book_id')->nullable(false);
+            $table->integer('rate')->nullable(true);
+            $table->text('comment')->nullable(true);
+
             $table->timestamps();
         });
     }

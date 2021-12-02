@@ -26,14 +26,14 @@
 <div class="row d-flex justify-content-center my-3 mb-5">
   @if(1 < $books["page"] && $books["page"] <= $books["pageCount"])
     <h4>
-      <a href="{{ route("books.list", ["keyword"=>$keyword, "page" => $books["page"]-1])  }}" class="btn btn-light mx-2 " data={ disable_with: "処理中..." }>
+      <a href="{{ route("book.index", ["keyword"=>$keyword, "page" => $books["page"]-1])  }}" class="btn btn-light mx-2 " data={ disable_with: "処理中..." }>
         前のページ
       </a>
     </h4>
   @endif
   @if(1 <= $books["page"] && $books["page"] < $books["pageCount"])
     <h4>
-      <a href="{{ route("books.list", ["keyword"=>$keyword, "page" => $books["page"]+1])  }}" class="btn btn-light mx-2 " data={ disable_with: "処理中..." }>
+      <a href="{{ route("book.index", ["keyword"=>$keyword, "page" => $books["page"]+1])  }}" class="btn btn-light mx-2 " data={ disable_with: "処理中..." }>
         次のページ
       </a>
     </h4>

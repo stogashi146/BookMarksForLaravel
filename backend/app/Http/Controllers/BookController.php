@@ -46,7 +46,7 @@ class BookController extends Controller
             $book = Book::create($book_request);
         }
         
-        return redirect()->route("book.detail", ["id"=>$book->id]);
+        return redirect()->route("book.show", ["book"=>$book->id]);
         // return view('book/show',compact("book"));
         
     }
@@ -60,7 +60,16 @@ class BookController extends Controller
     public function show($id)
     {
         $book = Book::find($id);
-        return view('book/show',compact("book"));
+        $user = \Auth::user();
+        if($user){
+            $read = $user -> reads -> where("book_id", $book->id) -> first();
+            $unread = $user -> unreads -> where("book_id", $book->id) -> first();
+        }else{
+            $read = "";
+            $unread = "";
+        }
+        
+        return view('book/show',compact("book","read","unread"));
     }
 
     /**

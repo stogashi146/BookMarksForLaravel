@@ -22,7 +22,7 @@
           </div>
           <div class="col-md-3 d-flex align-items-center justify-content-end">
             @if (\Auth::user() == $user )
-              <a href="" class="user_edit_btn btn btn-outline-secondary px-2 mr-2">
+              <a href="{{ route("user.edit", ["user" => \Auth::user()->id]) }}" class="user_edit_btn btn btn-outline-secondary px-2 mr-2">
                 <i class="fas fa-cog mx-1"></i>
                 <span>プロフィール編集</span>
               </a>

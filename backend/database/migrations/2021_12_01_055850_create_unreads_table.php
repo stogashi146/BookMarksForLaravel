@@ -15,6 +15,10 @@ class CreateUnreadsTable extends Migration
     {
         Schema::create('unreads', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            $table->integer('user_id')->nullable(false);
+            $table->integer('book_id')->nullable(false);
+            
             $table->timestamps();
         });
     }

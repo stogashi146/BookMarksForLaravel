@@ -16,7 +16,7 @@
         </div>
         <div class="flex-item text-center mt-5">
           <!-- <%= link_to "今すぐ本を探す", books_path(keyword: "本", page: rand(100, class:"btn about_find_book p-3" %> -->
-            <a href="{{ route("books.list", ["keyword"=> "本", "page" => 1]) }}" class="btn about_find_book p-3">
+            <a href="{{ route("book.index", ["keyword"=> "本", "page" => 1]) }}" class="btn about_find_book p-3">
             今すぐ本を探す
           </a>
         </div>

@@ -9,6 +9,17 @@ use GuzzleHttp\Client;
 
 class Book extends Model
 {
+
+    public function reads()
+    {
+        return $this->hasMany("App\Read");
+    }
+
+    public function unreads()
+    {
+        return $this->hasMany("App\Unread");
+    }
+
     protected $fillable =[
         "title",
         "description",

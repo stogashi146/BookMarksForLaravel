@@ -19,11 +19,16 @@ Auth::routes();
 // Route::group(['middleware' => 'guest'], function () {
     Route::get('/', 'HomeController@about')->name('home');
     Route::get('/about', 'HomeController@about')->name('about');
-    Route::get("/books", "BookController@index")->name("books.list");
-    Route::post("/book", "BookController@store")->name("book.store");
-    Route::get("/book/{id}", "BookController@show")->name("book.detail");
-    Route::get('/book/ranking', 'BookController@ranking')->name('book.ranking');
+    
 // });
+    Route::resource("book", "BookController",["only" => ["index", "show", "store"]]);
+    Route::prefix('book')->group(function(){
+        Route::get('ranking', 'BookController@ranking')->name('book.ranking');
+    });
+    Route::resource("read", "ReadController",["only" => ["show", "store", "destroy", "update"]]);
+    Route::resource("unread", "UnreadController",["only" => ["store", "destroy"]]);
+    
+
     Route::resource("user", "UserController",["only" => ["show", "edit", "update"]]);
 
 Route::group(['middleware' => 'auth'], function () {

@@ -32,15 +32,15 @@
                             <ul class="navbar-nav ml-auto">
                             @if(\Auth::user())
                                 <li class="nav-item active mr-3">
-                                    <a class="header_find_book p-3" href="{{ route("books.list", ["keyword"=> "本", "page" => 1]) }}">本を探す</a>
+                                    <a class="header_find_book p-3" href="{{ route("book.index", ["keyword"=> "本", "page" => 1]) }}">本を探す</a>
                                 </li>
-                                <li class="nav-item active mr-4">
+                                <!-- <li class="nav-item active mr-4">
                                     <a class="nav-link" href="{{ route("user.show", ["user"=>\Auth::user()]) }}">
                                         <i class="fas fa-user fa-fw"></i>
                                         <span>マイページ</span>
                                     </a>
-                                </li>
-                                <li class="nav-item active mr-3">
+                                </li> -->
+                                <!-- <li class="nav-item active mr-3">
                                     <a class="nav-link" href="{{-- route("timeline.list") --}}">
                                         <i class="fa fa-tasks"></i>
                                         <span>タイムライン</span>
@@ -55,17 +55,17 @@
                                         <i class="far fa-calendar-alt fa-fw"></i>
                                         <span>発売カレンダー</span>
                                     </a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item active dropdown dropleft">
                                     <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink" role="button">
                                         <i class="fas fa-user fa-fw"></i>
                                     </a>
                                     <div aria-labelledby="navbarDropdownMenuLink m-5" class="dropdown-menu shadow">
-                                        <a class="dropdown-item text-secondary" href="{{-- route("user.detail") --}}">
+                                        <a class="dropdown-item text-secondary" href="{{ route("user.show", ["user" => \Auth::user()->id]) }}">
                                             <i class="fas fa-user fa-fw"></i>
                                             <span>マイページ</span>
                                         </a>
-                                        <a class="dropdown-item text-secondary" href="{{-- route("user.edit") --}}">
+                                        <a class="dropdown-item text-secondary" href="{{ route("user.edit", ["user" => \Auth::user()->id]) }}">
                                             <i class="fas fa-cog fa-fw"></i>
                                             <span>プロフィール編集</span>
                                         </a>
@@ -87,7 +87,7 @@
                                 </li>
                             @else
                                 <li class="nav-item active mr-4">
-                                    <a href="{{ route("books.list", ["keyword"=> "本", "page" => 1]) }}" class="header_find_book p-3">
+                                    <a href="{{ route("book.index", ["keyword"=> "本", "page" => 1]) }}" class="header_find_book p-3">
                                         本を探す
                                     </a>
                                 </li>
@@ -97,12 +97,12 @@
                                         <span> About</span>
                                     </a>
                                 </li>
-                                <li class="nav-item active mr-4">
+                                <!-- <li class="nav-item active mr-4">
                                     <a class="text-secondary" href="{{ route("book.ranking") }}">
                                         <i class="fas fa-crown fa-fw" aria-hidden="true"></i>
                                         <span> ランキング</span>
                                     </a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item active mr-4">
                                     <a class="text-secondary" href="{{ route("login") }}">
                                         <i class="fas fa-user fa-fw" aria-hidden="true"></i>

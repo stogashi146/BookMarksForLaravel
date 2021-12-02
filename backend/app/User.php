@@ -9,7 +9,17 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
-    
+
+    public function reads()
+    {
+        return $this->hasMany("App\Read");
+    }
+
+    public function unreads()
+    {
+        return $this->hasMany("App\Unread");
+    }
+
     /**
      * The attributes that are mass assignable.
      *
