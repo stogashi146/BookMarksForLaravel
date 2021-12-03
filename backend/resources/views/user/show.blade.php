@@ -85,7 +85,7 @@
   </div>
 </div>
 
-<script>
+<!-- <script>
   $('#read_btn').on('click', function() {
     $("#user_main_item").html("#{j(render "read", book_reads: @book_reads)}");
     $('.user_show_btn').removeClass('read_btn_active');
@@ -109,6 +109,6 @@
     $('.user_show_btn').removeClass('read_btn_active');
     $(this).addClass('read_btn_active');
   });
-</script>
+</script> -->
 
 @endsection

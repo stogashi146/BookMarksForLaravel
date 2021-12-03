@@ -30,6 +30,11 @@ Auth::routes();
     
 
     Route::resource("user", "UserController",["only" => ["show", "edit", "update"]]);
+    Route::get('user/{user}/reads', 'UserController@reads')->name('user.reads');
+    Route::get('user/{user}/unreads', 'UserController@unreads')->name('user.unreads');
+    Route::get('user/{user}/following', 'UserController@following')->name('user.following');
+    Route::get('user/{user}/followers', 'UserController@followers')->name('user.followers');
+    
 
 Route::group(['middleware' => 'auth'], function () {
     

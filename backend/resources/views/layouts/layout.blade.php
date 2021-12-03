@@ -61,7 +61,7 @@
                                         <i class="fas fa-user fa-fw"></i>
                                     </a>
                                     <div aria-labelledby="navbarDropdownMenuLink m-5" class="dropdown-menu shadow">
-                                        <a class="dropdown-item text-secondary" href="{{ route("user.show", ["user" => \Auth::user()->id]) }}">
+                                        <a class="dropdown-item text-secondary" href="{{ route("user.reads", ["user" => \Auth::user()->id]) }}">
                                             <i class="fas fa-user fa-fw"></i>
                                             <span>マイページ</span>
                                         </a>

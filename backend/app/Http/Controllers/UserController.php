@@ -24,6 +24,30 @@ class UserController extends Controller
         return view('user/show',compact("user"));
     }
 
+    public function reads($id)
+    {
+        $user = User::find($id);
+        return view('user/reads',compact("user"));
+    }
+
+    public function unreads($id)
+    {
+        $user = User::find($id);
+        return view('user/unreads',compact("user"));
+    }
+
+    public function following($id)
+    {
+        $user = User::find($id);
+        return view('user/following',compact("user"));
+    }
+
+    public function followers($id)
+    {
+        $user = User::find($id);
+        return view('user/followers',compact("user"));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

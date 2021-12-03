@@ -89,7 +89,7 @@
                       @if($read)
                         {{ Form::model($read, ["route" => ["read.update", $read->id]]) }}
                           <div class="form-group">
-                            {{ Form::text("comment", null, ["class" => "form-control", "placeholder" => "レビュー無記入でも投稿できます。", "rows" => 5, "value" => $read -> comment]) }}
+                            {{ Form::textarea("comment", null, ["class" => "form-control", "placeholder" => "レビュー無記入でも投稿できます。", "rows" => 5, "value" => $read -> comment]) }}
                           </div>
                           <div class="form-group" id="star-edit">
                             <!-- = f.hidden_field :rate, class: "form-control", id: :review_star -->
@@ -129,7 +129,7 @@
                       @else
                         {{ Form::open(["route" => "read.store"]) }}
                           <div class="form-group">
-                            {{ Form::text("comment", null, ["class" => "form-control", "placeholder" => "レビュー無記入でも投稿できます。", "rows" => 5]) }}
+                            {{ Form::textarea("comment", null, ["class" => "form-control", "placeholder" => "レビュー無記入でも投稿できます。", "rows" => 5]) }}
                           </div>
                           <div class="form-group">
                             <!-- = f.hidden_field :rate, class: "form-control" -->
@@ -243,8 +243,12 @@
           <div class="d-flex flex-row">
             <div class="flex-column">
               <div class="d-flex flex-row mb-1">
-                <a href="{{ route("user.show",["user" => $review -> user]) }}">
-                  <img src="{{asset('images/'.$review -> user -> image)}}" class="rounded-circle" width="50px" height="50px">
+                <a href="{{ route("user.reads",["user" => $review -> user]) }}">
+                  @if($review -> user -> image == "noimage.jpg")
+                    <img src="{{asset('images/noimage.jpg')}}" class="rounded-circle" width="50px" height="50px">
+                  @else
+                    <img src="{{asset('storage/images/'.$review -> user->image)}}" class="rounded-circle" width="50px" height="50px">
+                  @endif
                 </a>
                 <strong class="flex-column ml-3">
                   <a href="{{ route("user.show",["user" => $review -> user]) }}" class="text-dark">{{ $review -> user -> name}}の感想・レビュー</a>  
