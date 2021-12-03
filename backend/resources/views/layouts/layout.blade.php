@@ -27,10 +27,18 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <form class="form-inline my-2 my-lg-0" action="/books" accept-charset="UTF-8" method="get">
+                            <!-- <form class="form-inline my-2 my-lg-0" action="/books" accept-charset="UTF-8" method="get">
                                 <input required="required" class="form-control mr-sm-2" type="text" name="keyword" id="keyword">
                                 <input type="submit" name="commit" value="検索" class="btn btn-sm btn-secondary m-0 ml-sm-0" data-disable-with="検索">
-                            </form>
+                            </form> -->
+
+                            {{ Form::open(["route" => "book.index", "class" => "form-inline my-2 my-lg-0"]) }}
+                                {{ Form::text("keyword", null, ["class" => "form-control mr-sm-2", "placeholder" => "検索"]) }}
+                                {{ Form::hidden('page', 1) }}
+                                {{ Form::submit("検索", ["class" => "btn btn-sm btn-secondary m-0 ml-sm-0"])}}
+                                @method("GET")
+                            {{ Form::close() }}
+
                             <ul class="navbar-nav ml-auto">
                             @if(\Auth::user())
                                 <li class="nav-item active mr-3">

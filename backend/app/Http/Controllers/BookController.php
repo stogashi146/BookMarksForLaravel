@@ -14,8 +14,8 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
-        $keyword = $request->query("keyword");
-        $page = $request->query("page");
+        $keyword = request("keyword");
+        $page = request("page");
         $books = Book::search_books($keyword, $page);
         return view('book/index',["books"=>$books, "keyword"=>$keyword]);
     }
