@@ -20,6 +20,18 @@ class User extends Authenticatable
         return $this->hasMany("App\Unread");
     }
 
+    //  user->followerでユーザーが"フォローされている"ユーザー一覧を取得
+    public function followed()
+    {
+        return $this->belongsToMany("App\User", "App\Relationship", "followed_id", "follower_id");
+    }
+
+    
+    //  user->followedでユーザーが"フォローしている"ユーザー一覧を取得
+    public function follower()
+    {
+        return $this->belongsToMany("App\User", "App\Relationship", "follower_id", "followed_id");
+    }
     /**
      * The attributes that are mass assignable.
      *

@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="col-md-3 d-flex align-items-center justify-content-end">
-            @if (\Auth::user()->id == $user -> id )
+            @if (\Auth::user()->id == $user->id )
               <a href="{{ route("user.edit", ["user" => \Auth::user()->id]) }}" class="user_edit_btn btn btn-outline-secondary px-2 mr-2">
                 <i class="fas fa-cog mx-1"></i>
                 <span>プロフィール編集</span>
@@ -69,7 +69,7 @@
               </a>
             </div>
             <div class="d-block user_show_btns">
-              <a href="{{ route("user.unreads", ["user" => $user]) }}" class="btn btn-light user_show_btn read_btn_active" id="unread_btn">
+              <a href="{{ route("user.unreads", ["user" => $user]) }}" class="btn btn-light user_show_btn" id="unread_btn">
                 <i class="far fa-plus-square fa-2x"></i>
                 <p class="text-center">
                 {{ count($user -> unreads) }}
@@ -77,7 +77,7 @@
               </a>
             </div>
             <div class="d-block user_show_btns">
-              <a href="{{ route("user.following", ["user" => $user]) }}" class="btn btn-light user_show_btn pt-2" id="follow_btn">
+              <a href="{{ route("user.following", ["user" => $user]) }}" class="btn btn-light user_show_btn pt-2 read_btn_active" id="follow_btn">
                 <small>フォロー</small>
                 <p class="text-center">
                   {{ count($followings_users) }}
@@ -99,66 +99,58 @@
   </div>
 
   <div class="row" id="user_main_item">
-    <div class="col-md-12 col-sm-12 mt-4">
-      <div class="row">
-        @foreach($user -> unreads as $unread)
-          <div class="col-md-6 col-sm-10 h-100 w-100">
-            <div class="card flex-row mb-4 shadow border h-md-250 user_show_cardbody">
-              <div class="card-body d-flex flex-column align-items-start">
-                <strong>
-                  <a href="{{ route("book.show", ["book" => $unread -> book]) }}">{{ $unread -> book -> title }}</a>
-                </strong>
-                <!-- div id="rate_#{book_read.id}" class="my-1" -->
-                <p class="mb-0 small">
-                  著者：{{ $unread -> book -> author  }}
-                </p>
-                <p class="mb-0small">
-                  出版社：{{ $unread -> book -> publisher_name }}
-                </p>
-                <p class="mb-0 small">
-                  発売日：{{ $unread -> book -> sales_date }}
-                </p>
-                  <!-- strong
-                    = simple_format(book_read.comment.truncate(30))
-                    - if book_read.comment.size > 30
-                      small
-                        = link_to "続きを読む", book_book_read_path(book_read.book_id,book_read, user: book_read.user_id) -->
-
-                <div class="d-inline-flex btn-group btn-group-md mb-2">
-                  <div class="badge badge-light text-dark shadow-sm align-items-end p-2">
-                    <i class="fas fa-book-reader fa-2x text-dark pr-1"></i>
-                    <span class="text-center">
-                      {{ count($unread -> book -> reads) }}
-                    </span>
-                  </div>
-                  <div class="badge badge-light text-dark shadow-sm align-items-end p-2">
-                    <i class="far fa-plus-square fa-2x text-dark pr-1"></i>
-                    <span class="text-center">
-                      {{ count($unread -> book -> unreads) }}
-                    </span>
-                  </div>
-                </div>
-
-                <!-- .d-flex.flex-row.mt-auto
-                  span id="favorite_btn_#{book_read.id}"
-                    = render "read_favorites/favorite_btn", review: book_read
-
-                  .badge.badge-pill.badge-light.pt-2
-                    h6
-                      = link_to book_book_read_path(book_read.book_id, book_read.id, user: book_read.user_id), class:"text-secondary" do
-                        i.fa.fa-comment コメント#{book_read.read_comments.count}
-
-                small.align-self-end
-                  = book_read.created_at.strftime('%Y/%m/%d') -->
-              </div>
-              <a href="{{ route("book.show", ["book" => $unread -> book]) }}" class="flex-auto text-right my-auto">
-                <img src="{{ $unread -> book -> image_url}}" class="user_show_jacket" width="245px" height="355px">
+    @foreach($followings_users as $follow_user)
+      <div class="col-md-4 mt-4">
+        <div class="bg-white p-3 border w-100 h-100">
+          <div class="d-flex">
+            <a href=" {{ route("user.reads", ["user" => $follow_user ]) }}">
+              @if($follow_user->image == "noimage.jpg")
+                <img src="{{asset('images/noimage.jpg')}}" class="rounded-circle shadow-sm mr-4" width="80px" height="80px">
+              @else
+                <img src="{{asset('storage/images/'.$follow_user->image)}}" class="rounded-circle shadow-sm mr-4" width="80px" height="80px">
+              @endif
+            </a>
+            <div class="d-flex flex-column">
+              <strong class="d-flex flex-row">
+              <a href=" {{ route("user.reads", ["user" => $follow_user ]) }}" class="text-dark mr-3">
+                {{ $follow_user -> name }}
               </a>
+              </strong>
+              <small class="mt-3">
+                {{ $follow_user -> introduction }}
+              </small>
             </div>
           </div>
-        @endforeach
+
+          <div class="d-flex mt-5">
+            <div class="flex-column w-25 text-center">
+              <i class="fas fa-book-reader fa-2x text-dark"></i>
+              <p class="text-center">
+                {{ count($follow_user -> reads) }}
+              </p>
+            </div>
+            <div class="flex-column w-25 text-center">
+              <i class="far fa-plus-square fa-2x text-dark"></i>
+              <p class="text-center">
+                {{ count($follow_user -> unreads) }}
+              </p>
+            </div>
+            <div class="flex-column w-25 text-center mt-2">
+              <small>フォロー</small>
+              <p class="text-center">
+                {{ count($follow_user -> follower) }}
+              </p>
+            </div>
+            <div class="flex-column w-25 text-center mt-2">
+              <small>フォロワー</small>
+              <p class="text-center">
+                {{ count($follow_user -> followed) }}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    @endforeach
   </div>
 </div>
 

@@ -23,8 +23,9 @@
       </div>
       <div class="col-md-6 col-sm-12">
         <div class="about_slide_box">
-          <!-- <% @book.each do |book|%><%= image_tag book.image_url.chomp("?_ex=200x200"), class:"mx-3" %>
-          <% end %> -->
+          @foreach($books as $book)
+            <img src=" {{ $book -> image_url }}" class = "mx-3">
+          @endforeach
         </div>
     </div>
   </div>
@@ -72,7 +73,7 @@
           </p>
         </div>
       </div>
-      <div class="col-md-3 col-sm-3 d-inline-block text-center align-top">
+      <div class="col-md-3 col-sm-12 d-inline-block text-center align-top">
         <i class="fas fa-bell fa-5x rounded-circle bg-white p-5 about_intro_orangeicon">
         </i>
         <div class="col-md-11 mx-auto">
@@ -82,15 +83,16 @@
           <p>
             <span>
               読みたいリスト
-              <i class="far fa-plus-square pr-1">
-              </i>に入れた本は、発売前にメール通知、
+              <i class="far fa-plus-square pr-1"></i>
+              に入れた本は、発売前にメール通知、
               発売当日には通知でお知らせします！
-            </span></p>
+            </span>
+          </p>
           <small>※メール通知は、プロフィール編集から設定できます
           </small>
         </div>
       </div>
-      <div class="col-md-3 col-sm-3 d-inline-block text-center align-top">
+      <div class="col-md-3 col-sm-12 d-inline-block text-center align-top">
         <i class="fas fa-book-reader fa-5x rounded-circle bg-white p-5 about_intro_blueicon">
         </i>
         <div class="col-md-10 mx-auto">
@@ -103,16 +105,18 @@
             読んだ本は読んだリスト
             <i class="fas fa-book-reader px-1">
             </i>に追加して、レビューしよう
-          </span></div>
+          </span>
+        </div>
       </div>
-      <div class="col-md-3 col-sm-3 d-inline-block text-center align-top">
+      <div class="col-md-2 col-sm-12 d-inline-block text-center align-top">
         <i class="fas fa-comments fa-5x rounded-circle bg-white p-5 about_intro_blueicon">
         </i>
         <div class="col-md-10 mx-auto">
           <p class="about_intro_bluetext mt-3">
             交流する
           </p>
-          <p>フォローしてフォロユーザーの読書記録を確認しよう
+          <p>
+            フォローしてフォロユーザーの読書記録を確認しよう
           </p>
         </div>
       </div>
@@ -124,7 +128,6 @@
       <img alt="楽天ウェブサービスセンター" border="0" height="21" src="https://webservice.rakuten.co.jp/img/credit/200709/credit_22121.gif" title="楽天ウェブサービスセンター" width="221" />
     </a><!-- Rakuten Web Services Attribution Snippet TO HERE -->
   </div>
-</div>
 </div>
 <script>
   $('.about_slide_box').slick({

@@ -27,25 +27,37 @@ class UserController extends Controller
     public function reads($id)
     {
         $user = User::find($id);
-        return view('user/reads',compact("user"));
+        $follow = \Auth::user() -> follower -> where("id", $user->id) -> first();
+        $followings_users = $user -> follower;
+        $followers_users = $user -> followed;
+        return view('user/reads',compact("user", "follow", "followings_users", "followers_users"));
     }
 
     public function unreads($id)
     {
         $user = User::find($id);
-        return view('user/unreads',compact("user"));
+        $follow = \Auth::user() -> follower -> where("id", $user->id) -> first();
+        $followings_users = $user -> follower;
+        $followers_users = $user -> followed;
+        return view('user/unreads',compact("user", "follow", "followings_users", "followers_users"));
     }
 
     public function following($id)
     {
         $user = User::find($id);
-        return view('user/following',compact("user"));
+        $follow = \Auth::user() -> follower -> where("id", $user->id) -> first();
+        $followings_users = $user -> follower;
+        $followers_users = $user -> followed;
+        return view('user/following',compact("user", "follow", "followings_users", "followers_users"));
     }
 
     public function followers($id)
     {
         $user = User::find($id);
-        return view('user/followers',compact("user"));
+        $follow = \Auth::user() -> follower -> where("id", $user->id) -> first();
+        $followings_users = $user -> follower;
+        $followers_users = $user -> followed;
+        return view('user/followers',compact("user", "follow", "followings_users", "followers_users"));
     }
 
     /**

@@ -25,14 +25,33 @@
             </div>
           </div>
           <div class="col-md-3 d-flex align-items-center justify-content-end">
-            @if (\Auth::user() == $user )
+            @if (\Auth::user()->id == $user->id )
               <a href="{{ route("user.edit", ["user" => \Auth::user()->id]) }}" class="user_edit_btn btn btn-outline-secondary px-2 mr-2">
                 <i class="fas fa-cog mx-1"></i>
                 <span>プロフィール編集</span>
               </a>
             @else
               <div class="follow_ajax_btn">
-                <!-- = render "relationships/follow_btn", user: @user -->
+                @if($follow)
+                  <a class="btn btn-sm btn-secondary px-3 align-items-center" href="{{ route("relationship.destroy",["user" => $user]) }}" data: { disable_with: "送信中..." } 
+                                              onclick="event.preventDefault(); document.getElementById('follow-destroy').submit();">
+                    <i class="fas fa-user-check mx-1"></i>
+                    <span>フォロー中</span>
+                  </a>
+                  <form id="follow-destroy" action="{{ route("relationship.destroy",["user" => $user]) }}" method="POST" style="display: none;">
+                      @method("DELETE")
+                      @csrf
+                  </form>
+                @else
+                  <a class="btn btn-sm btn-light btn-outline-secondary px-3" href="{{ route("relationship.store",["user" => $user]) }}" data: { disable_with: "送信中..." } 
+                                              onclick="event.preventDefault(); document.getElementById('follow-create').submit();">
+                    <i class="fas fa-user-plus mx-1"></i>
+                    <span>フォロー</span>
+                  </a>
+                  <form id="follow-create" action="{{ route("relationship.store",["user" => $user]) }}" method="POST" style="display: none;">
+                      @csrf
+                  </form>
+                @endif
               </div>
             @endif
           </div>
@@ -61,7 +80,7 @@
               <a href="{{ route("user.following", ["user" => $user]) }}" class="btn btn-light user_show_btn pt-2" id="follow_btn">
                 <small>フォロー</small>
                 <p class="text-center">
-                  <!-- = "#{@user.followings.count}" -->
+                  {{ count($followings_users) }}
                 </p>
               </a>
             </div>
@@ -69,7 +88,7 @@
               <a href="{{ route("user.followers", ["user" => $user]) }}" class="btn btn-light user_show_btn pt-2" id="follower_btn">
                 <small>フォロワー</small>
                 <p class="text-center">
-                  <!-- = "#{@user.followers.count}" -->
+                  {{ count($followers_users) }}
                 </p>
               </a>
             </div>

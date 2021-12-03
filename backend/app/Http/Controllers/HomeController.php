@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Book;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,8 @@ class HomeController extends Controller
      */
     public function about()
     {
-        return view('home/about');
+
+        $books = Book::all();
+        return view('home/about', ["books" => $books]);
     }
 }

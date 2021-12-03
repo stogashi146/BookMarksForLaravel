@@ -32,7 +32,26 @@
               </a>
             @else
               <div class="follow_ajax_btn">
-                = render "relationships/follow_btn", user: @user
+                @if($follow)
+                  <a class="btn btn-sm btn-secondary px-3 align-items-center" href="{{ route("relationship.destory",["user" => $user]) }}" data: { disable_with: "送信中..." } 
+                                              onclick="event.preventDefault(); document.getElementById('follow-destory').submit();">
+                    <i class="fas fa-user-check mx-1"></i>
+                    <span>フォロー中</span>
+                  </a>
+                  <form id="follow-destory" action="{{ route("relationship.destory",["user" => $user]) }}" method="POST" style="display: none;">
+                      @method("DELETE")
+                      @csrf
+                  </form>
+                @else
+                  <a class="btn btn-sm btn-light btn-outline-secondary px-3" href="{{ route("relationship.store",["user" => $user]) }}" data: { disable_with: "送信中..." } 
+                                              onclick="event.preventDefault(); document.getElementById('follow-create').submit();">
+                    <i class="fas fa-user-plus mx-1"></i>
+                    <span>フォロー</span>
+                  </a>
+                  <form id="follow-create" action="{{ route("relationship.store",["user" => $user]) }}" method="POST" style="display: none;">
+                      @csrf
+                  </form>
+                @endif
               </div>
             @endif
           </div>

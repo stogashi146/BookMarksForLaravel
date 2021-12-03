@@ -34,6 +34,10 @@ Auth::routes();
     Route::get('user/{user}/unreads', 'UserController@unreads')->name('user.unreads');
     Route::get('user/{user}/following', 'UserController@following')->name('user.following');
     Route::get('user/{user}/followers', 'UserController@followers')->name('user.followers');
+
+    Route::post("relationship", "RelationshipController@store")->name('relationship.store');
+    Route::delete("relationship", "RelationshipController@destroy")->name('relationship.destroy');;
+
     
 
 Route::group(['middleware' => 'auth'], function () {
