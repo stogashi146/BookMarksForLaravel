@@ -40,7 +40,7 @@ Auth::routes();
 
     Route::get('contact', 'ContactController@contact')->name('contact.form');
     Route::get('contact/confirm', 'ContactController@confirm')->name('contact.confirm');
-    Route::post('contact/send', 'ContactController@send')->name('contact.send');
+    Route::get('contact/send', 'ContactController@send')->name('contact.send');
 
     
 

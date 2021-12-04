@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contact;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactMail;
+
+
 
 class ContactController extends Controller
 {
@@ -21,5 +25,15 @@ class ContactController extends Controller
         $content = request("content");
 
         return view('contact/confirm', ["email" => $email, "category" => $category, "content" => $content]);
+    }
+
+    public function send(Request $request)
+    {
+        $email = request("email");
+        $category = request("category");
+        $content = request("content");
+
+        Mail::send(new ContactMail($email, $category, $content));
+        return view('contact.send');
     }
 }
