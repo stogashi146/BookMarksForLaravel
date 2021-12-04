@@ -33,7 +33,7 @@
                             </form> -->
 
                             {{ Form::open(["route" => "book.index", "class" => "form-inline my-2 my-lg-0"]) }}
-                                {{ Form::text("keyword", null, ["class" => "form-control mr-sm-2", "placeholder" => "検索"]) }}
+                                {{ Form::text("keyword", null, ["class" => "form-control mr-sm-2", "placeholder" => "検索", "required" => "true"]) }}
                                 {{ Form::hidden('page', 1) }}
                                 {{ Form::submit("検索", ["class" => "btn btn-sm btn-secondary m-0 ml-sm-0"])}}
                                 @method("GET")

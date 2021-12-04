@@ -38,6 +38,10 @@ Auth::routes();
     Route::post("relationship", "RelationshipController@store")->name('relationship.store');
     Route::delete("relationship", "RelationshipController@destroy")->name('relationship.destroy');;
 
+    Route::get('contact', 'ContactController@contact')->name('contact.form');
+    Route::get('contact/confirm', 'ContactController@confirm')->name('contact.confirm');
+    Route::post('contact/send', 'ContactController@send')->name('contact.send');
+
     
 
 Route::group(['middleware' => 'auth'], function () {
