@@ -47,8 +47,6 @@ class BookController extends Controller
         }
         
         return redirect()->route("book.show", ["book"=>$book->id]);
-        // return view('book/show',compact("book"));
-        
     }
 
     /**

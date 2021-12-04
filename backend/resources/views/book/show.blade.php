@@ -243,7 +243,7 @@
           <div class="d-flex flex-row">
             <div class="flex-column">
               <div class="d-flex flex-row mb-1">
-                <a href="{{ route("user.reads",["user" => $review -> user]) }}">
+                <a href="{{ route("user.reads",["user" => $review -> user, "sort" => "default"]) }}">
                   @if($review -> user -> image == "noimage.jpg")
                     <img src="{{asset('images/noimage.jpg')}}" class="rounded-circle" width="50px" height="50px">
                   @else
@@ -251,7 +251,7 @@
                   @endif
                 </a>
                 <strong class="flex-column ml-3">
-                  <a href="{{ route("user.show",["user" => $review -> user]) }}" class="text-dark">{{ $review -> user -> name}}の感想・レビュー</a>  
+                  <a href="{{ route("user.reads",["user" => $review -> user, "sort" => "default"]) }}" class="text-dark">{{ $review -> user -> name}}の感想・レビュー</a>  
                   <!-- <small class="text-muted">
                     = time_ago_in_words(review.created_at).upcase
                   </small> -->

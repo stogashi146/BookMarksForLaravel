@@ -71,7 +71,7 @@
                                         <i class="fas fa-user fa-fw"></i>
                                     </a>
                                     <div aria-labelledby="navbarDropdownMenuLink m-5" class="dropdown-menu shadow">
-                                        <a class="dropdown-item text-secondary" href="{{ route("user.reads", ["user" => \Auth::user()->id]) }}">
+                                        <a class="dropdown-item text-secondary" href="{{ route("user.reads", ["user" => \Auth::user()->id, "sort" => "default"]) }}">
                                             <i class="fas fa-user fa-fw"></i>
                                             <span>マイページ</span>
                                         </a>
@@ -82,6 +82,10 @@
                                         <a class="dropdown-item text-secondary" href="{{ route("about") }}">
                                             <i class="fas fa-book-reader fa-fw"></i>
                                             <span>About</span>
+                                        </a>
+                                        <a class="dropdown-item text-secondary" href="{{ route("contact.form") }}">
+                                        <i class="far fa-envelope"></i>
+                                            <span>お問い合わせ</span>
                                         </a>
                                         <a class="dropdown-item text-secondary" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
@@ -123,6 +127,12 @@
                                     <a class="text-secondary" href="{{ route("register") }}">
                                         <i class="fas fa-sign-out-alt fa-fw" aria-hidden="true"></i>
                                         <span> 新規登録</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item active mr-4">
+                                    <a class="text-secondary" href="{{ route("contact.form") }}">
+                                        <i class="far fa-envelope"></i>
+                                        <span> お問い合わせ</span>
                                     </a>
                                 </li>
                             @endif

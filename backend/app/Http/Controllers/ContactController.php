@@ -34,6 +34,11 @@ class ContactController extends Controller
         $content = request("content");
 
         Mail::send(new ContactMail($email, $category, $content));
-        return view('contact.send');
+        return redirect()->route("contact.send_complete");
+    }
+
+    public function send_complete(Request $request)
+    {
+        return view('contact.send_complete');
     }
 }

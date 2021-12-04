@@ -64,7 +64,7 @@
                 @method("PUT")
                 {{ Form::submit("変更を保存する", ["class" => "btn btn-success"])}}
                 {{ Form::close() }}
-                <a href="{{ route("user.show", ["user" => \Auth::user()->id]) }}" class="btn btn-secondary ml-3">
+                <a href="{{ route("user.reads", ["user" => \Auth::user()->id, "sort" => "default"]) }}" class="btn btn-secondary ml-3">
                   戻る
                 </a>
               </div>

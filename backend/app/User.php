@@ -49,6 +49,172 @@ class User extends Authenticatable
         "provider",
     ];
 
+    public static function read_sort($key, $user){
+        $sort = $key;
+        $user_id = $user -> id;
+
+        switch($sort){
+            case "default":
+                return Read::select()->join("books","books.id", "=", "reads.book_id")
+                    ->where("user_id", $user_id)
+                    ->get();
+                break;
+            case "title_desc":
+                return Read::select()->join("books","books.id", "=", "reads.book_id")
+                    ->where("user_id", $user_id)
+                    ->orderBy("books.title","desc")
+                    ->get();
+                break;
+            case "title_asc":
+                return Read::select()->join("books","books.id", "=", "reads.book_id")
+                    ->where("user_id", $user_id)
+                    ->orderBy("books.title","asc")
+                    ->get();
+                break;
+            case "author_desc":
+                return Read::select()->join("books","books.id", "=", "reads.book_id")
+                    ->where("user_id", $user_id)
+                    ->orderBy("books.author","desc")
+                    ->get();
+                break;
+            case "author_asc":
+                return Read::select()->join("books","books.id", "=", "reads.book_id")
+                    ->where("user_id", $user_id)
+                    ->orderBy("books.author","asc")
+                    ->get();
+                break;
+            case "sales_desc":
+                return Read::select()->join("books","books.id", "=", "reads.book_id")
+                    ->where("user_id", $user_id)
+                    ->orderBy("books.sales_date","desc")
+                    ->get();
+                break;
+            case "sales_asc":
+                return Read::select()->join("books","books.id", "=", "reads.book_id")
+                    ->where("user_id", $user_id)
+                    ->orderBy("books.sales_date","asc")
+                    ->get();
+                break;
+            case "add_desc":
+                return Read::select()->join("books","books.id", "=", "reads.book_id")
+                    ->where("user_id", $user_id)
+                    ->orderBy("reads.created_at","desc")
+                    ->get();
+                break;
+            case "add_asc":
+                return Read::select()->join("books","books.id", "=", "reads.book_id")
+                    ->where("user_id", $user_id)
+                    ->orderBy("reads.created_at","asc")
+                    ->get();
+                break;
+            }
+    }
+
+    public static function unread_sort($key, $user){
+        $sort = $key;
+        $user_id = $user -> id;
+
+        switch($sort){
+            case "default":
+                return Unread::select()->join("books","books.id", "=", "unreads.book_id")
+                    ->where("user_id", $user_id)
+                    ->get();
+                break;
+            case "title_desc":
+                return Unread::select()->join("books","books.id", "=", "unreads.book_id")
+                    ->where("user_id", $user_id)
+                    ->orderBy("books.title","desc")
+                    ->get();
+                break;
+            case "title_asc":
+                return Unread::select()->join("books","books.id", "=", "unreads.book_id")
+                    ->where("user_id", $user_id)
+                    ->orderBy("books.title","asc")
+                    ->get();
+                break;
+            case "author_desc":
+                return Unread::select()->join("books","books.id", "=", "unreads.book_id")
+                    ->where("user_id", $user_id)
+                    ->orderBy("books.author","desc")
+                    ->get();
+                break;
+            case "author_asc":
+                return Unread::select()->join("books","books.id", "=", "unreads.book_id")
+                    ->where("user_id", $user_id)
+                    ->orderBy("books.author","asc")
+                    ->get();
+                break;
+            case "sales_desc":
+                return Unread::select()->join("books","books.id", "=", "unreads.book_id")
+                    ->where("user_id", $user_id)
+                    ->orderBy("books.sales_date","desc")
+                    ->get();
+                break;
+            case "sales_asc":
+                return Unread::select()->join("books","books.id", "=", "unreads.book_id")
+                    ->where("user_id", $user_id)
+                    ->orderBy("books.sales_date","asc")
+                    ->get();
+                break;
+            case "add_desc":
+                return Unread::select()->join("books","books.id", "=", "unreads.book_id")
+                    ->where("user_id", $user_id)
+                    ->orderBy("unreads.created_at","desc")
+                    ->get();
+                break;
+            case "add_asc":
+                return Unread::select()->join("books","books.id", "=", "unreads.book_id")
+                    ->where("user_id", $user_id)
+                    ->orderBy("unreads.created_at","asc")
+                    ->get();
+                break;
+            }
+    }
+
+    public static function follow_sort($key, $user){
+        $sort = $key;
+
+        switch($sort){
+            case "default":
+                return $user->follower;
+                break;
+            case "name_desc":
+                return $user->follower->sortByDesc("name");
+                break;
+            case "name_asc":
+                return $user->follower->sortBy("name");
+                break;
+            case "add_desc":
+                return $user->follower->sortByDesc("created_at");
+                break;
+            case "add_asc":
+                return $user->follower->sortBy("created_at");
+                break;
+            }
+    }
+
+    public static function followed_sort($key, $user){
+        $sort = $key;
+
+        switch($sort){
+            case "default":
+                return $user->followed;
+                break;
+            case "name_desc":
+                return $user->followed->sortByDesc("name");
+                break;
+            case "name_asc":
+                return $user->followed->sortBy("name");
+                break;
+            case "add_desc":
+                return $user->followed->sortByDesc("created_at");
+                break;
+            case "add_asc":
+                return $user->followed->sortBy("created_at");
+                break;
+            }
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

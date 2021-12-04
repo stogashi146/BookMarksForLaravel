@@ -61,7 +61,7 @@
         <div class="row">
           <div class="col-md-12 d-inline-flex">
             <div class="d-block user_show_btns">
-              <a href="{{ route("user.reads", ["user" => $user]) }}" class="btn btn-light user_show_btn">
+              <a href="{{ route("user.reads", ["user" => $user, "sort" => "default"]) }}" class="btn btn-light user_show_btn">
                   <i class="fas fa-book-reader fa-2x text-dark"></i>
                   <p class="text-center">
                     {{ count($user -> reads) }}
@@ -69,7 +69,7 @@
               </a>
             </div>
             <div class="d-block user_show_btns">
-              <a href="{{ route("user.unreads", ["user" => $user]) }}" class="btn btn-light user_show_btn read_btn_active" id="unread_btn">
+              <a href="{{ route("user.unreads", ["user" => $user, "sort" => "default"]) }}" class="btn btn-light user_show_btn read_btn_active" id="unread_btn">
                 <i class="far fa-plus-square fa-2x"></i>
                 <p class="text-center">
                 {{ count($user -> unreads) }}
@@ -77,7 +77,7 @@
               </a>
             </div>
             <div class="d-block user_show_btns">
-              <a href="{{ route("user.following", ["user" => $user]) }}" class="btn btn-light user_show_btn pt-2" id="follow_btn">
+              <a href="{{ route("user.following", ["user" => $user, "sort" => "default"]) }}" class="btn btn-light user_show_btn pt-2" id="follow_btn">
                 <small>フォロー</small>
                 <p class="text-center">
                   {{ count($followings_users) }}
@@ -85,7 +85,7 @@
               </a>
             </div>
             <div class="d-block user_show_btns">
-              <a href="{{ route("user.followers", ["user" => $user]) }}" class="btn btn-light user_show_btn pt-2" id="follower_btn">
+              <a href="{{ route("user.followers", ["user" => $user, "sort" => "default"]) }}" class="btn btn-light user_show_btn pt-2" id="follower_btn">
                 <small>フォロワー</small>
                 <p class="text-center">
                   {{ count($followers_users) }}
@@ -99,9 +99,24 @@
   </div>
 
   <div class="row" id="user_main_item">
-    <div class="col-md-12 col-sm-12 mt-4">
+    <div class="col-md-3 col-sm-3 offset-10 px-5">
+        <div class="row text-right">
+          <div class="drop-down">
+            <button class="btn btn-light border dropdown-toggle" id="dropdownMenu" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-filter"></i>ソート
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+              @foreach($read_sort as $key => $value)
+                <a href="{{ route("user.unreads", ["user" => $user ->id ,"sort" => $key]) }}" class="dropdown-item">{{ $value }}</a>
+              @endforeach
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 col-sm-12 mt-2">
       <div class="row">
-        @foreach($user -> unreads as $unread)
+        @foreach($unreads as $unread)
           <div class="col-md-6 col-sm-10 h-100 w-100">
             <div class="card flex-row mb-4 shadow border h-md-250 user_show_cardbody">
               <div class="card-body d-flex flex-column align-items-start">
