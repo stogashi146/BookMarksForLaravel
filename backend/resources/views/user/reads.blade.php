@@ -121,7 +121,7 @@
             <div class="card flex-row mb-4 shadow border h-md-250 user_show_cardbody">
               <div class="card-body d-flex flex-column align-items-start">
                 <strong>
-                  <a href="{{ route("book.show", ["book" => $read]) }}">{{ $read -> title }}</a>
+                  <a href="{{ route("book.show", ["book" => $read -> book_id]) }}">{{ $read -> title }}</a>
                 </strong>
                 <!-- div id="rate_#{book_read.id}" class="my-1" -->
                 <p class="mb-0 ">
@@ -134,7 +134,7 @@
                   発売日：{{ $read -> sales_date }}
                 </p>
                 <p>
-                  {{ $read -> reads -> where("user_id",$user->id) -> first() -> comment  }}
+                  {{ $read -> comment  }}
                 </p>
                   <!-- strong
                     = simple_format(book_read.comment.truncate(30))
@@ -169,7 +169,7 @@
                 small.align-self-end
                   = book_read.created_at.strftime('%Y/%m/%d') -->
               </div>
-              <a href="{{ route("book.show", ["book" => $read]) }}" class="flex-auto text-right my-auto">
+              <a href="{{ route("book.show", ["book" => $read -> book_id]) }}" class="flex-auto text-right my-auto">
                 <img src="{{ $read -> image_url}}" class="user_show_jacket" width="245px" height="355px">
               </a>
             </div>

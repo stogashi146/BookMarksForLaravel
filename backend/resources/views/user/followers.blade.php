@@ -117,7 +117,7 @@
       <div class="col-md-4 mt-2">
         <div class="bg-white p-3 border w-100 h-100">
           <div class="d-flex">
-            <a href=" {{ route("user.reads", ["user" => $follower_user, "sort" => "default"]) }}">
+            <a href=" {{ route("user.reads", ["user" => $follower_user -> follower_id, "sort" => "default"]) }}">
               @if($follower_user->image == "noimage.jpg")
                 <img src="{{asset('images/noimage.jpg')}}" class="rounded-circle shadow-sm mr-4" width="80px" height="80px">
               @else
@@ -126,7 +126,7 @@
             </a>
             <div class="d-flex flex-column">
               <strong class="d-flex flex-row">
-              <a href=" {{ route("user.reads", ["user" => $follower_user, "sort" => "default"]) }}" class="text-dark mr-3">
+              <a href=" {{ route("user.reads", ["user" => $follower_user -> follower_id, "sort" => "default"]) }}" class="text-dark mr-3">
                 {{ $follower_user -> name }}
               </a>
               </strong>
@@ -140,25 +140,25 @@
             <div class="flex-column w-25 text-center">
               <i class="fas fa-book-reader fa-2x text-dark"></i>
               <p class="text-center">
-                {{ count($follower_user -> reads) }}
+                {{ $follower_user -> reads_count }}
               </p>
             </div>
             <div class="flex-column w-25 text-center">
               <i class="far fa-plus-square fa-2x text-dark"></i>
               <p class="text-center">
-                {{ count($follower_user -> unreads) }}
+                {{ $follower_user -> unreads_count }}
               </p>
             </div>
             <div class="flex-column w-25 text-center mt-2">
               <small>フォロー</small>
               <p class="text-center">
-                {{ count($follower_user -> follower) }}
+                {{ $follower_user -> follower_count }}
               </p>
             </div>
             <div class="flex-column w-25 text-center mt-2">
               <small>フォロワー</small>
               <p class="text-center">
-                {{ count($follower_user -> followed) }}
+                {{ $follower_user -> followed_count }}
               </p>
             </div>
           </div>

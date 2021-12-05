@@ -121,17 +121,17 @@
             <div class="card flex-row mb-4 shadow border h-md-250 user_show_cardbody">
               <div class="card-body d-flex flex-column align-items-start">
                 <strong>
-                  <a href="{{ route("book.show", ["book" => $unread -> book]) }}">{{ $unread -> book -> title }}</a>
+                  <a href="{{ route("book.show", ["book" => $unread -> book_id]) }}">{{ $unread -> title }}</a>
                 </strong>
                 <!-- div id="rate_#{book_read.id}" class="my-1" -->
                 <p class="mb-0 small">
-                  著者：{{ $unread -> book -> author  }}
+                  著者：{{ $unread -> author  }}
                 </p>
                 <p class="mb-0small">
-                  出版社：{{ $unread -> book -> publisher_name }}
+                  出版社：{{ $unread -> publisher_name }}
                 </p>
                 <p class="mb-0 small">
-                  発売日：{{ $unread -> book -> sales_date }}
+                  発売日：{{ $unread -> sales_date }}
                 </p>
                   <!-- strong
                     = simple_format(book_read.comment.truncate(30))
@@ -143,13 +143,13 @@
                   <div class="badge badge-light text-dark shadow-sm align-items-end p-2">
                     <i class="fas fa-book-reader fa-2x text-dark pr-1"></i>
                     <span class="text-center">
-                      {{ count($unread -> book -> reads) }}
+                      {{ $unread -> reads_count }}
                     </span>
                   </div>
                   <div class="badge badge-light text-dark shadow-sm align-items-end p-2">
                     <i class="far fa-plus-square fa-2x text-dark pr-1"></i>
                     <span class="text-center">
-                      {{ count($unread -> book -> unreads) }}
+                      {{ $unread -> unreads_count }}
                     </span>
                   </div>
                 </div>
@@ -166,8 +166,8 @@
                 small.align-self-end
                   = book_read.created_at.strftime('%Y/%m/%d') -->
               </div>
-              <a href="{{ route("book.show", ["book" => $unread -> book]) }}" class="flex-auto text-right my-auto">
-                <img src="{{ $unread -> book -> image_url}}" class="user_show_jacket" width="245px" height="355px">
+              <a href="{{ route("book.show", ["book" => $unread -> book_id]) }}" class="flex-auto text-right my-auto">
+                <img src="{{ $unread -> image_url}}" class="user_show_jacket" width="245px" height="355px">
               </a>
             </div>
           </div>

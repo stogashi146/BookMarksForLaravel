@@ -55,49 +55,69 @@ class User extends Authenticatable
 
         switch($sort){
             case "default":
-                return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
-                    $q->where("user_id", $user_id);})
-                    ->withCount("reads")->withCount("unreads")->get();
+                return Book::select()->join("reads","reads.book_id", "=", "books.id")
+                    ->where("user_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")
+                    ->get();
                 break;
             case "title_desc":
-                return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
-                    $q->where("user_id", $user_id);})
-                    ->withCount("reads")->withCount("unreads")->orderByDesc("title")->get();
+                // return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
+                //     $q->where("user_id", $user_id);})
+                //     ->withCount("reads")->withCount("unreads")->orderByDesc("title")->get();
+                return Book::select()->join("reads","reads.book_id", "=", "books.id")
+                    ->where("user_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")
+                    ->orderByDesc("title")
+                    ->get();
                 break;
             case "title_asc":
-                return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
-                    $q->where("user_id", $user_id);})
-                    ->withCount("reads")->withCount("unreads")->orderBy("title")->get();
+                return Book::select()->join("reads","reads.book_id", "=", "books.id")
+                    ->where("user_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")
+                    ->orderBy("title")
+                    ->get();
                 break;
             case "author_desc":
-                return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
-                    $q->where("user_id", $user_id);})
-                    ->withCount("reads")->withCount("unreads")->orderByDesc("author")->get();
+                return Book::select()->join("reads","reads.book_id", "=", "books.id")
+                    ->where("user_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")
+                    ->orderByDesc("author")
+                    ->get();
                 break;
             case "author_asc":
-                return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
-                    $q->where("user_id", $user_id);})
-                    ->withCount("reads")->withCount("unreads")->orderBy("author")->get();
+                return Book::select()->join("reads","reads.book_id", "=", "books.id")
+                    ->where("user_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")
+                    ->orderBy("author")
+                    ->get();
                 break;
             case "sales_desc":
-                return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
-                    $q->where("user_id", $user_id);})
-                    ->withCount("reads")->withCount("unreads")->orderByDesc("sales_date")->get();
+                return Book::select()->join("reads","reads.book_id", "=", "books.id")
+                    ->where("user_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")
+                    ->orderByDesc("sales_date")
+                    ->get();
                 break;
             case "sales_asc":
-                return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
-                    $q->where("user_id", $user_id);})
-                    ->withCount("reads")->withCount("unreads")->orderBy("sales_date")->get();
+                return Book::select()->join("reads","reads.book_id", "=", "books.id")
+                    ->where("user_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")
+                    ->orderBy("sales_date")
+                    ->get();
                 break;
             case "add_desc":
-                return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
-                    $q->where("user_id", $user_id);})
-                    ->withCount("reads")->withCount("unreads")->orderByDesc("created_at")->get();
+                return Book::select()->join("reads","reads.book_id", "=", "books.id")
+                    ->where("user_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")
+                    ->orderByDesc("reads.created_at")
+                    ->get();
                 break;
             case "add_asc":
-                return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
-                    $q->where("user_id", $user_id);})
-                    ->withCount("reads")->withCount("unreads")->orderBy("created_at")->get();
+                return Book::select()->join("reads","reads.book_id", "=", "books.id")
+                    ->where("user_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")
+                    ->orderBy("reads.created_at")
+                    ->get();
                 break;
             }
     }
@@ -108,56 +128,65 @@ class User extends Authenticatable
 
         switch($sort){
             case "default":
-                return Unread::select()->join("books","books.id", "=", "unreads.book_id")
+                return Book::select()->join("unreads","unreads.book_id", "=", "books.id")
                     ->where("user_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")
                     ->get();
                 break;
             case "title_desc":
-                return Unread::select()->join("books","books.id", "=", "unreads.book_id")
+                return Book::select()->join("unreads","unreads.book_id", "=", "books.id")
                     ->where("user_id", $user_id)
-                    ->orderBy("books.title","desc")
+                    ->withCount("reads")->withCount("unreads")
+                    ->orderByDesc("title")
                     ->get();
                 break;
             case "title_asc":
-                return Unread::select()->join("books","books.id", "=", "unreads.book_id")
+                return Book::select()->join("unreads","unreads.book_id", "=", "books.id")
                     ->where("user_id", $user_id)
-                    ->orderBy("books.title","asc")
+                    ->withCount("reads")->withCount("unreads")
+                    ->orderBy("title")
                     ->get();
                 break;
             case "author_desc":
-                return Unread::select()->join("books","books.id", "=", "unreads.book_id")
+                return Book::select()->join("unreads","unreads.book_id", "=", "books.id")
                     ->where("user_id", $user_id)
-                    ->orderBy("books.author","desc")
+                    ->withCount("reads")->withCount("unreads")
+                    ->orderByDesc("author")
                     ->get();
                 break;
             case "author_asc":
-                return Unread::select()->join("books","books.id", "=", "unreads.book_id")
+                return Book::select()->join("unreads","unreads.book_id", "=", "books.id")
                     ->where("user_id", $user_id)
-                    ->orderBy("books.author","asc")
+                    ->withCount("reads")->withCount("unreads")
+                    ->orderBy("author")
                     ->get();
                 break;
             case "sales_desc":
-                return Unread::select()->join("books","books.id", "=", "unreads.book_id")
+                return Book::select()->join("unreads","unreads.book_id", "=", "books.id")
                     ->where("user_id", $user_id)
-                    ->orderBy("books.sales_date","desc")
+                    ->withCount("reads")->withCount("unreads")
+                    ->orderByDesc("sales_date")
                     ->get();
                 break;
             case "sales_asc":
-                return Unread::select()->join("books","books.id", "=", "unreads.book_id")
+                return Book::select()->join("unreads","unreads.book_id", "=", "books.id")
                     ->where("user_id", $user_id)
-                    ->orderBy("books.sales_date","asc")
+                    ->withCount("reads")->withCount("unreads")
+                    ->orderBy("sales_date")
                     ->get();
                 break;
             case "add_desc":
-                return Unread::select()->join("books","books.id", "=", "unreads.book_id")
+                return Book::select()->join("unreads","unreads.book_id", "=", "books.id")
                     ->where("user_id", $user_id)
-                    ->orderBy("unreads.created_at","desc")
+                    ->withCount("reads")->withCount("unreads")
+                    ->orderByDesc("unreads.created_at")
                     ->get();
                 break;
             case "add_asc":
-                return Unread::select()->join("books","books.id", "=", "unreads.book_id")
+                return Book::select()->join("unreads","unreads.book_id", "=", "books.id")
                     ->where("user_id", $user_id)
-                    ->orderBy("unreads.created_at","asc")
+                    ->withCount("reads")->withCount("unreads")
+                    ->orderBy("unreads.created_at")
                     ->get();
                 break;
             }
@@ -165,46 +194,174 @@ class User extends Authenticatable
 
     public static function follow_sort($key, $user){
         $sort = $key;
+        $user_id = $user -> id;
 
         switch($sort){
             case "default":
-                return $user->follower;
+                return User::select()->join("relationships", "relationships.followed_id", "=", "users.id")
+                    ->where("follower_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->get();
                 break;
             case "name_desc":
-                return $user->follower->sortByDesc("name");
+                return User::select()->join("relationships", "relationships.followed_id", "=", "users.id")
+                    ->where("follower_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderByDesc("name")->get();
                 break;
             case "name_asc":
-                return $user->follower->sortBy("name");
+                return User::select()->join("relationships", "relationships.followed_id", "=", "users.id")
+                    ->where("follower_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderBy("name")->get();
                 break;
             case "add_desc":
-                return $user->follower->sortByDesc("created_at");
+                return User::select()->join("relationships", "relationships.followed_id", "=", "users.id")
+                    ->where("follower_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderByDesc("relationships.created_at")->get();
                 break;
             case "add_asc":
-                return $user->follower->sortBy("created_at");
+                return User::select()->join("relationships", "relationships.followed_id", "=", "users.id")
+                    ->where("follower_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderBy("relationships.created_at")->get();
+                break;
+            case "read_desc":
+                return User::select()->join("relationships", "relationships.followed_id", "=", "users.id")
+                    ->where("follower_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderByDesc("reads_count")->get();
+                break;
+            case "read_asc":
+                return User::select()->join("relationships", "relationships.followed_id", "=", "users.id")
+                    ->where("follower_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderBy("reads_count")->get();
+                break;
+            case "unread_desc":
+                return User::select()->join("relationships", "relationships.followed_id", "=", "users.id")
+                    ->where("follower_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderByDesc("unreads_count")->get();
+                break;
+            case "unread_asc":
+                return User::select()->join("relationships", "relationships.followed_id", "=", "users.id")
+                    ->where("follower_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderBy("unreads_count")->get();
+                break;
+            case "follow_desc":
+                return User::select()->join("relationships", "relationships.followed_id", "=", "users.id")
+                    ->where("follower_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderByDesc("follower_count")->get();
+                break;
+            case "follow_asc":
+                return User::select()->join("relationships", "relationships.followed_id", "=", "users.id")
+                    ->where("follower_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderBy("follower_count")->get();
+                break;
+            case "follower_desc":
+                return User::select()->join("relationships", "relationships.followed_id", "=", "users.id")
+                    ->where("follower_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderByDesc("followed_count")->get();
+                break;
+            case "follower_asc":
+                return User::select()->join("relationships", "relationships.followed_id", "=", "users.id")
+                    ->where("follower_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderBy("followed_count")->get();
                 break;
             }
     }
 
     public static function followed_sort($key, $user){
         $sort = $key;
+        $user_id = $user -> id;
 
         switch($sort){
             case "default":
-                return $user->followed;
+                return User::select()->join("relationships", "relationships.follower_id", "=", "users.id")
+                    ->where("followed_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->get();
                 break;
             case "name_desc":
-                return $user->followed->sortByDesc("name");
+                return User::select()->join("relationships", "relationships.follower_id", "=", "users.id")
+                    ->where("followed_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderByDesc("name")->get();
                 break;
             case "name_asc":
-                return $user->followed->sortBy("name");
+                return User::select()->join("relationships", "relationships.follower_id", "=", "users.id")
+                    ->where("followed_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderBy("name")->get();
                 break;
             case "add_desc":
-                return $user->followed->sortByDesc("created_at");
+                return User::select()->join("relationships", "relationships.follower_id", "=", "users.id")
+                    ->where("followed_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderByDesc("relationships.created_at")->get();
                 break;
             case "add_asc":
-                return $user->followed->sortBy("created_at");
+                return User::select()->join("relationships", "relationships.follower_id", "=", "users.id")
+                    ->where("followed_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderBy("relationships.created_at")->get();
                 break;
-            }
+            case "read_desc":
+                return User::select()->join("relationships", "relationships.follower_id", "=", "users.id")
+                    ->where("followed_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderByDesc("reads_count")->get();
+                break;
+            case "read_asc":
+                return User::select()->join("relationships", "relationships.follower_id", "=", "users.id")
+                    ->where("followed_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderBy("reads_count")->get();
+                break;
+            case "unread_desc":
+                return User::select()->join("relationships", "relationships.follower_id", "=", "users.id")
+                    ->where("followed_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderByDesc("unreads_count")->get();
+                break;
+            case "unread_asc":
+                return User::select()->join("relationships", "relationships.follower_id", "=", "users.id")
+                    ->where("followed_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderBy("unreads_count")->get();
+                break;
+            case "follow_desc":
+                return User::select()->join("relationships", "relationships.follower_id", "=", "users.id")
+                    ->where("followed_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderByDesc("follower_count")->get();
+                break;
+            case "follow_asc":
+                return User::select()->join("relationships", "relationships.follower_id", "=", "users.id")
+                    ->where("followed_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderBy("follower_count")->get();
+                break;
+            case "follower_desc":
+                return User::select()->join("relationships", "relationships.follower_id", "=", "users.id")
+                    ->where("followed_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderByDesc("followed_count")->get();
+                break;
+            case "follower_asc":
+                return User::select()->join("relationships", "relationships.follower_id", "=", "users.id")
+                    ->where("followed_id", $user_id)
+                    ->withCount("reads")->withCount("unreads")->withCount("follower")->withCount("followed")
+                    ->orderBy("followed_count")->get();
+                break;
+        }
     }
 
     /**
