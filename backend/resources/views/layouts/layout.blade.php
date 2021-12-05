@@ -41,7 +41,7 @@
 
                             <ul class="navbar-nav ml-auto">
                             @if(\Auth::user())
-                                <li class="nav-item active mr-3">
+                                <li class="nav-item active mr-3 mt-2">
                                     <a class="header_find_book p-3" href="{{ route("book.index", ["keyword"=> "本", "page" => 1]) }}">本を探す</a>
                                 </li>
                                 <!-- <li class="nav-item active mr-4">

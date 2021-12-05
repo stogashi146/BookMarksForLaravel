@@ -18,6 +18,7 @@
         "rakuten-ws/rws-php-sdk": "1.*"
     },
     "require-dev": {
+        "beyondcode/laravel-query-detector": "^1.5",
         "facade/ignition": "^1.16.15",
         "fakerphp/faker": "^1.9.1",
         "laravel/ui": "^1.0",

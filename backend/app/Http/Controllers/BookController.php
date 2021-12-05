@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Read;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -58,6 +59,7 @@ class BookController extends Controller
     public function show($id)
     {
         $book = Book::find($id);
+        $reads = Read::where("book_id", $book->id) -> with("user")->get();
         $user = \Auth::user();
         if($user){
             $read = $user -> reads -> where("book_id", $book->id) -> first();
@@ -67,7 +69,7 @@ class BookController extends Controller
             $unread = "";
         }
         
-        return view('book/show',compact("book","read","unread"));
+        return view('book/show',compact("book","read","unread","reads"));
     }
 
     /**

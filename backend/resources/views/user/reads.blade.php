@@ -121,11 +121,11 @@
             <div class="card flex-row mb-4 shadow border h-md-250 user_show_cardbody">
               <div class="card-body d-flex flex-column align-items-start">
                 <strong>
-                  <a href="{{ route("book.show", ["book" => $read -> book]) }}">{{ $read -> title }}</a>
+                  <a href="{{ route("book.show", ["book" => $read]) }}">{{ $read -> title }}</a>
                 </strong>
                 <!-- div id="rate_#{book_read.id}" class="my-1" -->
                 <p class="mb-0 ">
-                  著者：{{ $read  -> author  }}
+                  著者：{{ $read -> author  }}
                 </p>
                 <p class="mb-0">
                   出版社：{{ $read -> publisher_name }}
@@ -134,7 +134,7 @@
                   発売日：{{ $read -> sales_date }}
                 </p>
                 <p>
-                  {{ $read -> comment }}
+                  {{ $read -> reads -> where("user_id",$user->id) -> first() -> comment  }}
                 </p>
                   <!-- strong
                     = simple_format(book_read.comment.truncate(30))
@@ -146,13 +146,13 @@
                   <div class="badge badge-light text-dark shadow-sm align-items-end p-2">
                     <i class="fas fa-book-reader fa-2x text-dark pr-1"></i>
                     <span class="text-center">                      
-                      {{ count($read -> book -> reads) }}
+                      {{ $read -> reads_count }}
                     </span>
                   </div>
                   <div class="badge badge-light text-dark shadow-sm align-items-end p-2">
                     <i class="far fa-plus-square fa-2x text-dark pr-1"></i>
                     <span class="text-center">
-                      {{ count($read -> book -> unreads) }}
+                      {{ $read -> reads_count }}
                     </span>
                   </div>
                 </div>
@@ -169,8 +169,8 @@
                 small.align-self-end
                   = book_read.created_at.strftime('%Y/%m/%d') -->
               </div>
-              <a href="{{ route("book.show", ["book" => $read -> book]) }}" class="flex-auto text-right my-auto">
-                <img src="{{ $read -> book -> image_url}}" class="user_show_jacket" width="245px" height="355px">
+              <a href="{{ route("book.show", ["book" => $read]) }}" class="flex-auto text-right my-auto">
+                <img src="{{ $read -> image_url}}" class="user_show_jacket" width="245px" height="355px">
               </a>
             </div>
           </div>

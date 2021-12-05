@@ -55,57 +55,49 @@ class User extends Authenticatable
 
         switch($sort){
             case "default":
-                return Read::select()->join("books","books.id", "=", "reads.book_id")
-                    ->where("user_id", $user_id)
-                    ->get();
+                return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
+                    $q->where("user_id", $user_id);})
+                    ->withCount("reads")->withCount("unreads")->get();
                 break;
             case "title_desc":
-                return Read::select()->join("books","books.id", "=", "reads.book_id")
-                    ->where("user_id", $user_id)
-                    ->orderBy("books.title","desc")
-                    ->get();
+                return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
+                    $q->where("user_id", $user_id);})
+                    ->withCount("reads")->withCount("unreads")->orderByDesc("title")->get();
                 break;
             case "title_asc":
-                return Read::select()->join("books","books.id", "=", "reads.book_id")
-                    ->where("user_id", $user_id)
-                    ->orderBy("books.title","asc")
-                    ->get();
+                return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
+                    $q->where("user_id", $user_id);})
+                    ->withCount("reads")->withCount("unreads")->orderBy("title")->get();
                 break;
             case "author_desc":
-                return Read::select()->join("books","books.id", "=", "reads.book_id")
-                    ->where("user_id", $user_id)
-                    ->orderBy("books.author","desc")
-                    ->get();
+                return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
+                    $q->where("user_id", $user_id);})
+                    ->withCount("reads")->withCount("unreads")->orderByDesc("author")->get();
                 break;
             case "author_asc":
-                return Read::select()->join("books","books.id", "=", "reads.book_id")
-                    ->where("user_id", $user_id)
-                    ->orderBy("books.author","asc")
-                    ->get();
+                return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
+                    $q->where("user_id", $user_id);})
+                    ->withCount("reads")->withCount("unreads")->orderBy("author")->get();
                 break;
             case "sales_desc":
-                return Read::select()->join("books","books.id", "=", "reads.book_id")
-                    ->where("user_id", $user_id)
-                    ->orderBy("books.sales_date","desc")
-                    ->get();
+                return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
+                    $q->where("user_id", $user_id);})
+                    ->withCount("reads")->withCount("unreads")->orderByDesc("sales_date")->get();
                 break;
             case "sales_asc":
-                return Read::select()->join("books","books.id", "=", "reads.book_id")
-                    ->where("user_id", $user_id)
-                    ->orderBy("books.sales_date","asc")
-                    ->get();
+                return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
+                    $q->where("user_id", $user_id);})
+                    ->withCount("reads")->withCount("unreads")->orderBy("sales_date")->get();
                 break;
             case "add_desc":
-                return Read::select()->join("books","books.id", "=", "reads.book_id")
-                    ->where("user_id", $user_id)
-                    ->orderBy("reads.created_at","desc")
-                    ->get();
+                return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
+                    $q->where("user_id", $user_id);})
+                    ->withCount("reads")->withCount("unreads")->orderByDesc("created_at")->get();
                 break;
             case "add_asc":
-                return Read::select()->join("books","books.id", "=", "reads.book_id")
-                    ->where("user_id", $user_id)
-                    ->orderBy("reads.created_at","asc")
-                    ->get();
+                return Book::select()->with("reads")->whereHas("reads", function($q) use($user_id){
+                    $q->where("user_id", $user_id);})
+                    ->withCount("reads")->withCount("unreads")->orderBy("created_at")->get();
                 break;
             }
     }

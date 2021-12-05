@@ -237,7 +237,7 @@
   </div>
 
   <div class="row">
-    @foreach($book -> reads as $review)
+    @foreach($reads as $review)
       <div class="col-md-6">
         <div class="bg-white my-3 p-3">
           <div class="d-flex flex-row">
