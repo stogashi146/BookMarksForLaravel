@@ -80,7 +80,20 @@ class BookController extends Controller
      */
     public function ranking()
     {
-        //
+        $ranking_sort = config('array.genre');
+        $count = 1;
+
+        if(request("sort")){
+            $books = Book::search_books(request("keyword"), request("page"), $sales="sales", $genre=$ranking_sort[request("genre")], $hits="30");
+        }elseif(request("read_ranking")){
+            $books = Book::select()->withCount("reads")->withCount("unreads")
+                ->orderByDesc("reads_count")->limit(30)->get();
+        }elseif(request("unread_ranking")){
+            $books = Book::select()->withCount("reads")->withCount("unreads")
+                ->orderByDesc("unreads_count")->limit(30)->get();
+        }
+
+        return view('book/ranking',compact("ranking_sort","books","count"));
     }
 
     /**

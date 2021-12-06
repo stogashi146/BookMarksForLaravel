@@ -79,6 +79,10 @@
                                             <i class="fas fa-cog fa-fw"></i>
                                             <span>プロフィール編集</span>
                                         </a>
+                                        <a class="dropdown-item text-secondary" href="{{ route("book.ranking", ["keyword"=> "本", "page" => 1, "genre" => "総合", "sort" => "sort"]) }}">
+                                            <i class="fas fa-crown fa-fw"></i>
+                                            <span>ランキング</span>
+                                        </a>
                                         <a class="dropdown-item text-secondary" href="{{ route("about") }}">
                                             <i class="fas fa-book-reader fa-fw"></i>
                                             <span>About</span>
@@ -111,12 +115,12 @@
                                         <span> About</span>
                                     </a>
                                 </li>
-                                <!-- <li class="nav-item active mr-4">
-                                    <a class="text-secondary" href="{{ route("book.ranking") }}">
+                                <li class="nav-item active mr-4">
+                                    <a class="text-secondary" href="{{ route("book.ranking", ["keyword"=> "本", "page" => 1, "genre" => "総合", "sort" => "sort"]) }}">
                                         <i class="fas fa-crown fa-fw" aria-hidden="true"></i>
                                         <span> ランキング</span>
                                     </a>
-                                </li> -->
+                                </li>
                                 <li class="nav-item active mr-4">
                                     <a class="text-secondary" href="{{ route("login") }}">
                                         <i class="fas fa-user fa-fw" aria-hidden="true"></i>

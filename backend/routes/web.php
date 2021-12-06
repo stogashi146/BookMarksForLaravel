@@ -21,10 +21,8 @@ Auth::routes();
     Route::get('/about', 'HomeController@about')->name('about');
     
 // });
+    Route::get('book/ranking', 'BookController@ranking')->name('book.ranking');
     Route::resource("book", "BookController",["only" => ["index", "show", "store"]]);
-    Route::prefix('book')->group(function(){
-        Route::get('ranking', 'BookController@ranking')->name('book.ranking');
-    });
     Route::resource("read", "ReadController",["only" => ["show", "store", "destroy", "update"]]);
     Route::resource("unread", "UnreadController",["only" => ["store", "destroy"]]);
     
