@@ -22,6 +22,6 @@ N+1問題を解決しました。
 AWS ECS、ECRでデプロイを実施
 
 ## 開発環境
-PHP 8.0.13
-Laravel Framework 6.20.41
-Docker version 20.10.7
+- PHP 8.0.13
+- Laravel Framework 6.20.41
+- Docker version 20.10.7
