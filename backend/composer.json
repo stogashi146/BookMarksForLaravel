@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2.5|^8.0",
         "aws/aws-sdk-php": "^3.208",
+        "doctrine/dbal": "^3.2",
         "fideloper/proxy": "^4.4",
         "guzzlehttp/guzzle": "^7.4",
         "laravel/framework": "^6.20.26",
