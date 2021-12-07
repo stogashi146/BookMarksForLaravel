@@ -35,7 +35,7 @@ class Book extends Model
         $keyword = "&keyword=".$keyword;
         $page = "&page=".$page;
         $client = new \GuzzleHttp\Client();
-        $url =  "https://app.rakuten.co.jp/services/api/BooksTotal/Search/20170404?applicationId=1099709005909964402&formatVersion=2&booksGenreId=".$genre."&sort=".$sales."&hits=".$hits.$keyword.$page;
+        $url =  "https://app.rakuten.co.jp/services/api/BooksTotal/Search/20170404?applicationId=".env('RAKUTEN_APPLICATION_ID')."&formatVersion=2&booksGenreId=".$genre."&sort=".$sales."&hits=".$hits.$keyword.$page;
 
         $response = $client->request(
             'GET',
