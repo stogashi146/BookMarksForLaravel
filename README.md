@@ -1,5 +1,5 @@
 # BookMarks For Laravel
-http://35.73.233.140
+http://book-marks.ml
 
 ## 概要
 [BookMarks](https://github.com/stogashi146/BookMarks)を
