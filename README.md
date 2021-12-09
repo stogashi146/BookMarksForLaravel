@@ -1,5 +1,5 @@
 # BookMarks For Laravel
-http://book-marks.ml
+https://book-marks.ml
 
 ## 概要
 [BookMarks](https://github.com/stogashi146/BookMarks)を
