@@ -4,6 +4,7 @@ https://book-marks.ml
 ## 概要
 [BookMarks](https://github.com/stogashi146/BookMarks)を
 LaravelとDockerで開発しました。
+また、laravel版では小説の表示買いをテーマにしました。
 
 ## 追加機能
 以下の機能を追加しました。
